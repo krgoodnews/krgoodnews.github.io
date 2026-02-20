@@ -1,108 +1,337 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no">
-    <meta name="description" content="I'm a software engineer in Seoul.">
-
-    <link rel="stylesheet" type="text/css" href="https://krgoodnews.github.io/bootstrap/css/bootstrap.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Yunsu Guk — iOS Developer based in Seoul." />
+    <title>Yunsu Guk</title>
 
     <style>
+      @import url('https://cdn.jsdelivr.net/npm/geist@1.3.0/dist/fonts/geist-sans/style.css');
+
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      :root {
+        --bg: #ffffff;
+        --fg: #030213;
+        --muted: #f5f5f5;
+        --muted-fg: #737373;
+        --border: #e5e5e5;
+        --radius: 8px;
+      }
+
       body {
-        margin: 20px;
-        font-family: 'Apple SD Gothic Neo', 'Helvetica', 'Arial';
+        background: var(--bg);
+        color: var(--fg);
+        font-family: 'Geist Sans', 'Geist', ui-sans-serif, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
 
-      .container {
-        width: 550px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-      
-      .profileimg {
-        border-radius: 75px;
-        width: 150px;
-        height: 150px;
+      a {
+        color: inherit;
+        text-decoration: none;
       }
 
-      h1 {
+      /* ── Layout ── */
+      .page {
+        max-width: 620px;
+        margin: 0 auto;
+        padding: 72px 24px 96px;
+      }
+
+      /* ── Profile ── */
+      .profile {
+        display: flex;
+        align-items: flex-start;
+        gap: 18px;
+        margin-bottom: 28px;
+      }
+
+      .profile-img {
+        width: 68px;
+        height: 68px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+        border: 1px solid var(--border);
+      }
+
+      .profile-name {
+        font-size: 1.625rem;
         font-weight: 600;
-        font-size: 3.1em;
-        color: #555;
+        letter-spacing: -0.025em;
+        line-height: 1.3;
       }
 
-      h1 > small {
-        font-size: 0.7em;
+      .profile-name-kr {
+        font-size: 1.1rem;
+        font-weight: 400;
+        color: var(--muted-fg);
+        margin-left: 6px;
+        letter-spacing: 0;
       }
 
-      p {
-        font-size: 1.2em;
-        max-width: 300px;
+      .profile-bio {
+        font-size: 1rem;
+        color: var(--muted-fg);
+        margin-top: 5px;
+        line-height: 1.55;
       }
 
-			small { 
-			  font-size: smaller;
-			  color: #AAAAAA;
-			}
-
-			a:hover, a:visited, a:link, a:active
-			{
-			  text-decoration: none;
-			}
-
-      ul {
-        padding-left: 30px;
-        font-size: 1.1em;
+      /* ── Link row ── */
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 4px;
+        margin-bottom: 48px;
       }
 
-      @media screen and (min-width: 550px) {
-        .content-wrap {
-            margin-left: 30px;
+      .link-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        font-size: 0.95rem;
+        color: var(--muted-fg);
+        transition: color 0.12s, border-color 0.12s;
+      }
+
+      .link-pill:hover {
+        color: var(--fg);
+        border-color: #a3a3a3;
+      }
+
+      .link-pill svg {
+        flex-shrink: 0;
+      }
+
+      /* ── Section heading ── */
+      .section-label {
+        font-size: 0.85rem;
+        font-weight: 500;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted-fg);
+        margin-bottom: 10px;
+      }
+
+      /* ── Project list ── */
+      .project-list {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .project-card {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 12px 14px;
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        transition: border-color 0.12s, background 0.12s;
+      }
+
+      .project-card:hover {
+        border-color: #a3a3a3;
+        background: var(--muted);
+      }
+
+      .project-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        min-width: 0;
+      }
+
+      .project-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 5px;
+        object-fit: cover;
+        flex-shrink: 0;
+      }
+
+      .project-name {
+        font-size: 1rem;
+        font-weight: 500;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .project-sep {
+        color: var(--border);
+        font-size: 0.95rem;
+        flex-shrink: 0;
+      }
+
+      .project-desc {
+        font-size: 0.95rem;
+        color: var(--muted-fg);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .project-bottom {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 6px;
+      }
+
+      .tag {
+        font-size: 0.85rem;
+        padding: 2px 7px;
+        border-radius: 4px;
+        background: var(--muted);
+        color: var(--muted-fg);
+        border: 1px solid var(--border);
+        white-space: nowrap;
+      }
+
+      .arrow-icon {
+        color: var(--muted-fg);
+        display: flex;
+        align-items: center;
+      }
+
+      /* ── Responsive ── */
+      @media (max-width: 480px) {
+        .page {
+          padding: 48px 20px 72px;
         }
 
-        .profile-wrap, .content-wrap {
-            float: left;
+        .profile-name {
+          font-size: 1.375rem;
         }
 
-        h1 {
-            margin-top: 35px;
-        }
-      }
-      
-      @media screen and (max-width: 550px) {
-        .container {
-          width: 260px;
-          padding: 0;
-        }
-        .content-wrap small {
-          font-size: 0.5em;
+        .project-desc {
+          display: none;
         }
       }
     </style>
-    <title>Yunsu Guk</title>
-
   </head>
   <body>
-    <div class="container">
-      <div class="profile-wrap">
-				<img class="profileimg" src="https://avatars1.githubusercontent.com/u/8576087?s=460&v=4"
-             alt="https://yunsu.dev" />
+    <div class="page">
+
+      <!-- Profile -->
+      <div class="profile">
+        <img
+          class="profile-img"
+          src="https://avatars1.githubusercontent.com/u/8576087?s=460&v=4"
+          alt="Yunsu Guk"
+        />
+        <div>
+          <div class="profile-name">
+            Yunsu Guk
+            <span class="profile-name-kr">/ 국윤수</span>
+          </div>
+          <p class="profile-bio">
+            iOS Developer who eats a lot of <strong>meat</strong>, listens to a lot of <strong>jazz</strong>,<br />
+            drinks a lot of <strong>coffee</strong>, and writes a lot of <strong>code</strong>.
+          </p>
+        </div>
       </div>
-      <div class="content-wrap">
-        <h1>
-				  Yunsu Guk
-          <small>/ 국윤수</small>
-        </h1>
-        <p>
-					iOS Developer who eats a lot of <b>meat</b>, listens to a lot of <b>jazz</b>, drinks a lot of <b>coffee</b>, and write a lot of <b>code</b>.
-        </p>
-        <ul>
-          <li><a href="https://log.yunsu.dev">Blog</a></li>
-          <li><a href="https://github.com/krgoodnews">GitHub</a></li>
-        </ul>
+
+      <!-- Links -->
+      <div class="links">
+        <a href="https://log.yunsu.dev" class="link-pill">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/>
+          </svg>
+          Blog
+        </a>
+        <a href="https://github.com/krgoodnews" class="link-pill">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.51 11.51 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.562 21.8 24 17.302 24 12c0-6.627-5.373-12-12-12z"/>
+          </svg>
+          GitHub
+        </a>
       </div>
+
+      <!-- Projects -->
+      <p class="section-label">Projects</p>
+      <div class="project-list">
+        <a
+          href="https://tldr.yunsu.dev"
+          class="project-card"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="project-left">
+            <img class="project-icon" src="tldr-icon.png" alt="TLDR Link" />
+            <span class="project-name">TLDR Link</span>
+            <span class="project-sep">·</span>
+            <span class="project-desc">소셜 미디어 최적화 URL 단축 서비스</span>
+            <span class="arrow-icon" style="margin-left: auto;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+              </svg>
+            </span>
+          </div>
+          <div class="project-bottom">
+            <span class="tag">Next.js</span>
+            <span class="tag">Supabase</span>
+          </div>
+        </a>
+
+        <a
+          href="https://apps.apple.com/kr/app/id1534435771"
+          class="project-card"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="project-left">
+            <img class="project-icon" src="https://user-images.githubusercontent.com/8576087/96071385-ff139700-0edc-11eb-905a-607e027abe6c.png" alt="대충시계" />
+            <span class="project-name">대충시계</span>
+            <span class="project-sep">·</span>
+            <span class="project-desc">한글 시계 위젯 iOS 앱</span>
+            <span class="arrow-icon" style="margin-left: auto;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+              </svg>
+            </span>
+          </div>
+          <div class="project-bottom">
+            <span class="tag">iOS</span>
+            <span class="tag">Swift</span>
+          </div>
+        </a>
+
+        <a
+          href="https://github.com/krgoodnews/instagramuploader"
+          class="project-card"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <div class="project-left">
+            <img class="project-icon" src="https://user-images.githubusercontent.com/8576087/96072410-397e3380-0edf-11eb-9e21-56f5f4ec3ee0.png" alt="스샷그램" />
+            <span class="project-name">스샷그램</span>
+            <span class="project-sep">·</span>
+            <span class="project-desc">Instagram 비율 맞춤 이미지 가공 앱</span>
+            <span class="arrow-icon" style="margin-left: auto;">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 17L17 7M17 7H7M17 7v10"/>
+              </svg>
+            </span>
+          </div>
+          <div class="project-bottom">
+            <span class="tag">iOS</span>
+            <span class="tag">Open Source</span>
+          </div>
+        </a>
+      </div>
+
     </div>
   </body>
 </html>
-
